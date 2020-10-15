@@ -2,7 +2,7 @@
 /*
  * @Author: wangyuan
  * @Date: 2020-09-28 14:24:36
- * @LastEditTime: 2020-10-15 14:28:22
+ * @LastEditTime: 2020-10-15 17:01:11
  * @LastEditors: wangyuan
  * @Description:
  */
@@ -65,13 +65,12 @@ main()
 
 function main() {
   try {
-    console.log(path.resolve())
-    console.log(`${path.resolve()}/project.config.json`)
     try {
       const projectConfig = JSON.parse(fs.readFileSync(`${path.resolve()}/project.config.json`, 'utf8'))
       projectName = projectConfig.projectname
     } catch (error) {
-      console.log('error')
+    spinner.fail(chalk.red('没有在项目根路径执行命令'))
+
     }
   } catch (error) {
     spinner.warn(chalk.yellow('该项目与所选项目不符，请查看选择对应的项目'))
