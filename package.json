@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "wx-create-cli": "./bin/index.js"
+    "wx-cli": "./bin/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
