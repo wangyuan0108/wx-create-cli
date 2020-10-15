@@ -2,7 +2,7 @@
 /*
  * @Author: wangyuan
  * @Date: 2020-09-28 14:24:36
- * @LastEditTime: 2020-10-15 17:01:11
+ * @LastEditTime: 2020-10-15 17:11:38
  * @LastEditors: wangyuan
  * @Description:
  */
@@ -31,37 +31,7 @@ program
   .option('-c, --component <component>', '输入组件名称')
   .parse(process.argv)
 const { pack, page, component } = program
-// if (!(pack || page || component)) {
-//   spinner.fail(chalk.red('请输入有效命令'))
-//   return
-// }
-// inquirer
-//   .prompt([
-//     /* Pass your questions in here */
-//     {
-//       type: 'list',
-//       message: '选择需要创建页面的小程序:',
-//       name: 'wxapp',
-//       choices: [
-//         { key: 'slt', value: 'slt', name: '商流通' },
-//         { key: 'zpk', value: 'zpk', name: '正品控' },
-//       ],
-//       default: 'slt', // 默认值
-//     },
-//   ])
-//   .then(answers => {
-//     wxapp = answers.wxapp
-//     main()
-//   })
-//   .catch(error => {
-//     if (error.isTtyError) {
-//       // Prompt couldn't be rendered in the current environment
-//     } else {
-//       // Something else when wrong
-//     }
-//   })
 main()
-
 
 function main() {
   try {
@@ -69,8 +39,7 @@ function main() {
       const projectConfig = JSON.parse(fs.readFileSync(`${path.resolve()}/project.config.json`, 'utf8'))
       projectName = projectConfig.projectname
     } catch (error) {
-    spinner.fail(chalk.red('没有在项目根路径执行命令'))
-
+      spinner.fail(chalk.red('没有在项目根路径执行命令，请检查执行命令的根目录'))
     }
   } catch (error) {
     spinner.warn(chalk.yellow('该项目与所选项目不符，请查看选择对应的项目'))
@@ -219,26 +188,19 @@ function createComponent(component, type) {
         try {
           fs.mkdirSync(`${path.resolve()}/${pack}/pages/${page}/components`)
           try {
-            fs.mkdirSync(
-              `${path.resolve()}/${pack}/pages/${page}/components/${component}`
-            )
+            fs.mkdirSync(`${path.resolve()}/${pack}/pages/${page}/components/${component}`)
           } catch (error) {}
         } catch (error) {
           spinner.warn(chalk.yellow(`组件父文件夹  <${chalk.green('components')}>  文件夹已经存在，只创建组件`))
           try {
-            fs.mkdirSync(
-              `${path.resolve()}/${pack}/pages/${page}/components/${component}`
-            )
+            fs.mkdirSync(`${path.resolve()}/${pack}/pages/${page}/components/${component}`)
           } catch (error) {
             spinner.warn(chalk.yellow(`组件已经存在不在重新创建`))
             return
           }
         }
         dirCompArray.forEach(item => {
-          fs.copyFileSync(
-            `${path.resolve(path.dirname(__filename), `../comp`)}/${item}`,
-            `${pack}/pages/${page}/components/${component}/${item}`
-          )
+          fs.copyFileSync(`${path.resolve(path.dirname(__filename), `../comp`)}/${item}`, `${pack}/pages/${page}/components/${component}/${item}`)
         })
       } catch (error) {
         if (!fs.statSync(`${path.resolve()}/${pack}/pages/${page}/components`)) {
