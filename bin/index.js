@@ -2,7 +2,7 @@
 /*
  * @Author: wangyuan
  * @Date: 2020-09-28 14:24:36
- * @LastEditTime: 2020-10-15 17:11:38
+ * @LastEditTime: 2020-10-15 17:24:56
  * @LastEditors: wangyuan
  * @Description:
  */
@@ -23,9 +23,9 @@ const compType = {
 const dirPageArray = fs.readdirSync(`${path.resolve(path.dirname(__filename), `../temp`)}`)
 const dirCompArray = fs.readdirSync(`${path.resolve(path.dirname(__filename), `../comp`)}`)
 program
-  .name('wp-cli')
-  .usage('cli')
-  .version('0.1.0', '-v, --vers', '输出版本号')
+  .name('wx-cli')
+  // .usage('cli')
+  .version('1.0.3', '-v, --vers', '输出版本号')
   .option('-pack, --pack <package>', '输入分包名称')
   .option('-p, --page <page>', '输入页面名称')
   .option('-c, --component <component>', '输入组件名称')
