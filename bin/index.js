@@ -2,7 +2,7 @@
 /*
  * @Author: wangyuan
  * @Date: 2020-09-28 14:24:36
- * @LastEditTime: 2020-10-15 17:38:26
+ * @LastEditTime: 2020-10-15 17:41:27
  * @LastEditors: wangyuan
  * @Description:
  */
@@ -25,7 +25,7 @@ const dirCompArray = fs.readdirSync(`${path.resolve(path.dirname(__filename), `.
 program
   .name('wx-cli')
   // .usage('cli')
-  .version('1.0.3', '-v, --vers', '输出版本号')
+  // .version('1.0.3', '-v, --vers', '输出版本号')
   .option('-pack, --pack <package>', '输入分包名称')
   .option('-p, --page <page>', '输入页面名称')
   .option('-c, --component <component>', '输入组件名称')
@@ -169,7 +169,7 @@ function createComponent(component, type) {
       dirCompArray.forEach(item => {
         fs.copyFileSync(`${path.resolve(path.dirname(__filename), `../comp`)}/${item}`, `components/${component}/${item}`)
       })
-      spinner.succeed(chalk.bgGreen(`创建全局公用组件 ${chalk.red.bold(component)} 完成`))
+      spinner.succeed(chalk.green(`创建全局公用组件 ${chalk.red.bold(component)} 完成`))
       break
     case compType.PACK_COMP:
       spinner.info(chalk.blue('创建分包公用组件'))
@@ -182,7 +182,7 @@ function createComponent(component, type) {
       dirCompArray.forEach(item => {
         fs.copyFileSync(`${path.resolve(path.dirname(__filename), `../comp`)}/${item}`, `${pack}/components/${component}/${item}`)
       })
-      spinner.succeed(chalk.bgGreen(`创建分包公用组件 ${chalk.red.bold(component)} 完成`))
+      spinner.succeed(chalk.green(`创建分包公用组件 ${chalk.red.bold(component)} 完成`))
       break
     case compType.PAGE_COMP:
       try {
