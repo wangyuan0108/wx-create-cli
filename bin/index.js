@@ -2,7 +2,7 @@
 /*
  * @Author: wangyuan
  * @Date: 2020-09-28 14:24:36
- * @LastEditTime: 2020-10-15 17:24:56
+ * @LastEditTime: 2020-10-15 17:38:26
  * @LastEditors: wangyuan
  * @Description:
  */
@@ -40,6 +40,7 @@ function main() {
       projectName = projectConfig.projectname
     } catch (error) {
       spinner.fail(chalk.red('没有在项目根路径执行命令，请检查执行命令的根目录'))
+      return
     }
   } catch (error) {
     spinner.warn(chalk.yellow('该项目与所选项目不符，请查看选择对应的项目'))
