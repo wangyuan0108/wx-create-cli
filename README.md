@@ -23,7 +23,7 @@ wx-cli -pack wPack -p wPage
 ℹ page is ===========> wPage
 ✔ 操作成功
 ```
-
+```
 // 目录
 wPack
 └── pages
@@ -33,6 +33,7 @@ wPack
         ├── index.wxml
         ├── index.wxss
         └── strings.js
+```
 ### 同时创建包和页面
 
 ```
