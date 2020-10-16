@@ -2,7 +2,7 @@
 /*
  * @Author: wangyuan
  * @Date: 2020-09-28 14:24:36
- * @LastEditTime: 2020-10-15 17:41:27
+ * @LastEditTime: 2020-10-16 10:31:08
  * @LastEditors: wangyuan
  * @Description:
  */
@@ -20,8 +20,7 @@ const compType = {
   PACK_COMP: Symbol('分包公共组件'),
   PAGE_COMP: Symbol('页面组件'),
 }
-const dirPageArray = fs.readdirSync(`${path.resolve(path.dirname(__filename), `../temp`)}`)
-const dirCompArray = fs.readdirSync(`${path.resolve(path.dirname(__filename), `../comp`)}`)
+
 program
   .name('wx-cli')
   // .usage('cli')
@@ -31,6 +30,23 @@ program
   .option('-c, --component <component>', '输入组件名称')
   .parse(process.argv)
 const { pack, page, component } = program
+let dirPageArray
+let dirCompArray
+let pagePath
+let compPath
+try {
+  fs.statSync('template')
+  pagePath = `${path.resolve(`./template/page`)}`
+  compPath = `${path.resolve(`./template/comp`)}`
+  dirPageArray = fs.readdirSync(pagePath)
+  dirCompArray = fs.readdirSync(compPath)
+} catch (error) {
+  pagePath = `${path.resolve(path.dirname(__filename), `../template/page`)}`
+  compPath = `${path.resolve(path.dirname(__filename), `../template/comp`)}`
+  dirPageArray = fs.readdirSync(pagePath)
+  dirCompArray = fs.readdirSync(compPath)
+}
+
 main()
 
 function main() {
@@ -96,7 +112,7 @@ function createPage(pack, page) {
       return
     }
     dirPageArray.forEach(item => {
-      fs.copyFileSync(`${path.resolve(path.dirname(__filename), `../temp`)}/${item}`, `${pack}/${page}/${item}`)
+      fs.copyFileSync(`${pagePath}/${item}`, `${pack}/${page}/${item}`)
     })
   } else {
     try {
@@ -112,7 +128,7 @@ function createPage(pack, page) {
       return
     }
     dirPageArray.forEach(item => {
-      fs.copyFileSync(`${path.resolve(path.dirname(__filename), `../temp`)}/${item}`, `${pack}/pages/${page}/${item}`)
+      fs.copyFileSync(`${pagePath}/${item}`, `${pack}/pages/${page}/${item}`)
     })
   }
 
@@ -167,7 +183,7 @@ function createComponent(component, type) {
         }
       }
       dirCompArray.forEach(item => {
-        fs.copyFileSync(`${path.resolve(path.dirname(__filename), `../comp`)}/${item}`, `components/${component}/${item}`)
+        fs.copyFileSync(`${compPath}/${item}`, `components/${component}/${item}`)
       })
       spinner.succeed(chalk.green(`创建全局公用组件 ${chalk.red.bold(component)} 完成`))
       break
@@ -178,9 +194,15 @@ function createComponent(component, type) {
       } catch (error) {
         spinner.warn(chalk.yellow(`分包公用组件父文件夹 <components> 已存在,只创建组件文件夹`))
       }
+      try {
       fs.mkdirSync(`${path.resolve()}/${pack}/components/${component}`)
+        
+      } catch (error) {
+        spinner.warn(chalk.yellow(`分包公用组件 <${chalk.red.bold(component)}> 已存在不在创建`))
+        return
+      }
       dirCompArray.forEach(item => {
-        fs.copyFileSync(`${path.resolve(path.dirname(__filename), `../comp`)}/${item}`, `${pack}/components/${component}/${item}`)
+        fs.copyFileSync(`${compPath}/${item}`, `${pack}/components/${component}/${item}`)
       })
       spinner.succeed(chalk.green(`创建分包公用组件 ${chalk.red.bold(component)} 完成`))
       break
@@ -201,14 +223,14 @@ function createComponent(component, type) {
           }
         }
         dirCompArray.forEach(item => {
-          fs.copyFileSync(`${path.resolve(path.dirname(__filename), `../comp`)}/${item}`, `${pack}/pages/${page}/components/${component}/${item}`)
+          fs.copyFileSync(`${compPath}/${item}`, `${pack}/pages/${page}/components/${component}/${item}`)
         })
       } catch (error) {
         if (!fs.statSync(`${path.resolve()}/${pack}/pages/${page}/components`)) {
           fs.mkdirSync(`${path.resolve()}/${pack}/pages/${page}/components`)
         }
       }
-      spinner.succeed(chalk.bgGreen(`创建页面组件 ${chalk.red.bold(component)} 完成`))
+      spinner.succeed(chalk.bgGreen(`创建页面组件 <${chalk.red.bold(component)}> 完成`))
       break
     default:
       break
