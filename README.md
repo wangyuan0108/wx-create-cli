@@ -97,3 +97,21 @@ wx-cli -pack wPack -c wComponent
 // 命令
 wx-cli -pack wPack -p wPage -c wComponent
 ```
+
+### 自定义页面和组件模版
+
+在项目根目录下建立`template`文件夹，其中包括页面的模版文件夹`page`和组件的模版文件夹`comp`,文件夹里面的文件就是自定义的模版，会按模版生成自定义的页面和组件。文件目录如下：
+```
+template
+├── comp
+│   ├── index.js
+│   ├── index.json
+│   ├── index.wxml
+│   └── index.wxss
+└── page
+    ├── index.js
+    ├── index.json
+    ├── index.wxml
+    └── index.wxss
+```
+你可以自定义文件，如果根目录没有自定义模版，则生成默认的页面。
