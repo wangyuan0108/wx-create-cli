@@ -1,18 +1,18 @@
 {
   "name": "@waterpack/wx-cli",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "微信小程序生成分包/页面/组件等文件夹脚手架，命令生成。",
   "main": "index.js",
   "bin": {
-    "wx-cli": "dist/index.js"
+    "wx-cli": "dist/bin.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "files": [
-    "dist",
-    "template"
+    "/dist",
+    "/template"
   ],
   "author": "wangyuan0108",
   "license": "MIT",
