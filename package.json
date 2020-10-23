@@ -1,6 +1,6 @@
 {
   "name": "@waterpack/wx-cli",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "微信小程序生成分包/页面/组件等文件夹脚手架，命令生成。",
   "main": "index.js",
   "bin": {
