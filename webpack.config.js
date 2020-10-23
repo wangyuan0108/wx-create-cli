@@ -1,7 +1,7 @@
 /*
  * @Author: wangyuan
  * @Date: 2020-10-09 17:12:58
- * @LastEditTime: 2020-10-23 15:17:41
+ * @LastEditTime: 2020-10-23 16:02:08
  * @LastEditors: wangyuan
  * @Description:
  */
@@ -24,9 +24,6 @@ const config = {
           'babel-loader',
           {
             loader: 'node-loader',
-            options: {
-              name: 'bin.js',
-            },
           },
         ],
       },
