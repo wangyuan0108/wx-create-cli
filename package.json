@@ -4,12 +4,16 @@
   "description": "微信小程序生成分包/页面/组件等文件夹脚手架，命令生成。",
   "main": "index.js",
   "bin": {
-    "wx-cli": "bin/index.js"
+    "wx-cli": "dist/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
+  "files": [
+    "dist",
+    "template"
+  ],
   "author": "wangyuan0108",
   "license": "MIT",
   "dependencies": {
@@ -18,7 +22,12 @@
     "inquirer": "^7.3.3",
     "ora": "^5.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "node-loader": "^1.0.1",
+    "uglifyjs-webpack-plugin": "^2.2.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wangyuan0108/wx-create-cli.git"
